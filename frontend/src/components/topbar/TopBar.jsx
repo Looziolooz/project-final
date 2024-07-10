@@ -1,15 +1,16 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../../context/Context";
 import "./topbar.css";
+import { Context } from "../../context/Context";
 
-export default function TopBar() {
+const TopBar = () => {
   const { user, dispatch } = useContext(Context);
-  const PF = "http://localhost:5000/images/";
+  const PF = "http://localhost:3000/images/";
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
   };
+
   return (
     <div className="top">
       <div className="topLeft">
@@ -68,4 +69,6 @@ export default function TopBar() {
       </div>
     </div>
   );
-}
+};
+
+export default TopBar;

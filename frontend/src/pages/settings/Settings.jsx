@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import axios from "axios";
 
-export default function Settings() {
+const Settings = () => {
   const [file, setFile] = useState(null);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -12,7 +12,7 @@ export default function Settings() {
   const [success, setSuccess] = useState(false);
 
   const { user, dispatch } = useContext(Context);
-  const PF = "http://localhost:5000/images/";
+  const PF = "http://localhost:3000/images/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,4 +97,6 @@ export default function Settings() {
       <Sidebar />
     </div>
   );
-}
+};
+
+export default Settings;

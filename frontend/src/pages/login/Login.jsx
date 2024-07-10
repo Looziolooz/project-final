@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
 import "./login.css";
 
-export default function Login() {
+const Login = () => {
   const userRef = useRef();
   const passwordRef = useRef();
   const { dispatch, isFetching } = useContext(Context);
@@ -52,4 +52,5 @@ export default function Login() {
       </button>
     </div>
   );
-}
+};
+export default Login;

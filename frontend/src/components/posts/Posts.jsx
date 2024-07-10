@@ -1,7 +1,7 @@
 import Post from "../post/Post";
 import "./posts.css";
 
-export default function Posts({ posts }) {
+const Posts = ({ posts }) => {
   return (
     <div className="posts">
       {posts.map((p) => (
@@ -9,4 +9,5 @@ export default function Posts({ posts }) {
       ))}
     </div>
   );
-}
+};
+export default Posts;

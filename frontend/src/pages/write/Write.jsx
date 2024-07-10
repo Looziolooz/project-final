@@ -3,7 +3,7 @@ import "./write.css";
 import axios from "axios";
 import { Context } from "../../context/Context";
 
-export default function Write() {
+const Write = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
@@ -69,4 +69,5 @@ export default function Write() {
       </form>
     </div>
   );
-}
+};
+export default Write;

@@ -1,35 +1,54 @@
-const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  resolve: {
-    fallback: {
-      "http": require.resolve("stream-http"),
-      "https": require.resolve("https-browserify"),
-      "util": require.resolve("util/"),
-      "zlib": require.resolve("browserify-zlib"),
-      "stream": require.resolve("stream-browserify"),
-      "url": require.resolve("url/"),
-      "assert": require.resolve("assert/")
-    }
+  entry: './src/index.js', // Ensure this path matches the location of your entry file
+  output: {
+    path: path.resolve(__dirname, 'frontend/dist'),
+    filename: 'bundle.js',
+    publicPath: '/',
   },
-  plugins: [
-    new webpack.ProvidePlugin({
-      process: 'process/browser',
-      Buffer: ['buffer', 'Buffer']
-    })
-  ],
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
-      }
-    ]
-  }
+        },
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
+    ],
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'frontend/public'),
+    },
+    compress: true,
+    port: 3000,
+    historyApiFallback: true,
+    proxy: [
+      {
+        context: ['/api'],
+        target: 'http://localhost:5000',
+        pathRewrite: { '^/api': '' },
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html', // Ensure this path matches the location of your HTML template
+    }),
+  ],
 };
